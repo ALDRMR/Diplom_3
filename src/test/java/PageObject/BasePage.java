@@ -4,12 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class BasePage {
+
     protected final WebDriver driver;
 
-    private final By constructorButton = By.cssSelector("nav a[href='/']:has(p)");
-    private final By orderFeedButton = By.cssSelector("a[href='/feed']");
-    private final By logo = By.cssSelector("div[class*='logo'] a");
-    private final By personalAccountButton = By.cssSelector("a[href='/account']");
+    private final By constructorButton = By.xpath("//nav//a[contains(., 'Конструктор')]");
+    private final By orderFeedButton = By.xpath("//nav//a[contains(., 'Лента Заказов')]");
+    private final By profileButton = By.xpath("//nav//a[contains(., 'Личный Кабинет')]");
+
+    private final By logoButton = By.cssSelector("div[class^='AppHeader_header__logo'] > a");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -24,10 +26,10 @@ public class BasePage {
     }
 
     public void clickLogo() {
-        driver.findElement(logo).click();
+        driver.findElement(logoButton).click();
     }
 
     public void clickPersonalAccount() {
-        driver.findElement(personalAccountButton).click();
+        driver.findElement(profileButton).click();
     }
 }
