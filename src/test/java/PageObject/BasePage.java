@@ -29,7 +29,7 @@ public class BasePage {
         driver.findElement(LOGO_BUTTON).click();
     }
 
-    public void clickPersonalAccount() {
+    public void clickProfile() {
         driver.findElement(PROFILE_BUTTON).click();
     }
 }
