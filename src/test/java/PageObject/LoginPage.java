@@ -12,8 +12,6 @@ public class LoginPage extends BasePage {
     public static final By PASSWORD_FIELD = By.xpath("//input[@name='Пароль']");
     public static final By LOGIN_BUTTON = By.xpath("//button[text()='Войти']");
 
-    public static final By PASSWORD_ERROR_MESSAGE = By.xpath("//p[@class='input__error']");
-
     public static final By REGISTER_BUTTON = By.xpath("//a[text()='Зарегистрироваться']");
     public static final By FORGOT_PASSWORD_BUTTON = By.xpath("//a[text()='Восстановить пароль']");
 
@@ -43,14 +41,6 @@ public class LoginPage extends BasePage {
 
     public WebElement getForgotPasswordButton() {
         return driver.findElement(FORGOT_PASSWORD_BUTTON);
-    }
-
-    public boolean isPasswordErrorDisplayed() {
-        return driver.findElement(PASSWORD_ERROR_MESSAGE).isDisplayed();
-    }
-
-    public String getPasswordErrorText() {
-        return driver.findElement(PASSWORD_ERROR_MESSAGE).getText();
     }
 
     public void login(String email, String password) {

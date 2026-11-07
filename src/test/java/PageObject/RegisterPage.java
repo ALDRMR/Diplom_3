@@ -14,6 +14,8 @@ public class RegisterPage extends BasePage{
     public static final By REGISTER_BUTTON = By.xpath("//button[text()='Зарегистрироваться']");
     public static final By LOGIN_BUTTON = By.cssSelector("a[href='/login']");
 
+    public static final By PASSWORD_ERROR_MESSAGE = By.xpath("//p[@class='input__error']");
+
     public RegisterPage(WebDriver driver) {
         super(driver);
     }
@@ -40,6 +42,14 @@ public class RegisterPage extends BasePage{
 
     public WebElement getLoginButton() {
         return driver.findElement(LOGIN_BUTTON);
+    }
+
+    public boolean isPasswordErrorDisplayed() {
+        return driver.findElement(PASSWORD_ERROR_MESSAGE).isDisplayed();
+    }
+
+    public String getPasswordErrorText() {
+        return driver.findElement(PASSWORD_ERROR_MESSAGE).getText();
     }
 
     public void register(String name, String email, String password) {
