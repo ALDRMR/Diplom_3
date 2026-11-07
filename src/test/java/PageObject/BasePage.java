@@ -9,7 +9,7 @@ public class BasePage {
 
     private final By CONSTRUCTOR_BUTTON = By.xpath("//nav//a[contains(., 'Конструктор')]");
     private final By ORDER_FEED_BUTTON = By.xpath("//nav//a[contains(., 'Лента Заказов')]");
-    private final By PROFILE_BUTTON = By.xpath("//nav//a[contains(., 'Личный Кабинет')]");
+    private final By ACCOUNT_BUTTON = By.xpath("//nav//a[contains(., 'Личный Кабинет')]");
 
     private final By LOGO_BUTTON = By.cssSelector("div[class^='AppHeader_header__logo'] > a");
 
@@ -30,6 +30,6 @@ public class BasePage {
     }
 
     public void clickProfile() {
-        driver.findElement(PROFILE_BUTTON).click();
+        driver.findElement(ACCOUNT_BUTTON).click();
     }
 }

@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 
 public class ConstructorPage extends BasePage {
 
+    public static final By MAIN_HEADER = By.xpath("//h1[text()='Соберите бургер']");
+
     public static final By BUNS_TAB = By.xpath("//div[span[text()='Булки']]");
     public static final By SAUCES_TAB = By.xpath("//div[span[text()='Соусы']]");
     public static final By FILLINGS_TAB = By.xpath("//div[span[text()='Начинки']]");
@@ -26,24 +28,28 @@ public class ConstructorPage extends BasePage {
         return driver.findElement(FILLINGS_TAB);
     }
 
-    public boolean isSelected(WebElement tab) {
+    public boolean isHeaderDisplayed() {
+        return driver.findElement(MAIN_HEADER).isDisplayed();
+    }
+
+    public boolean isTabSelected(WebElement tab) {
         return tab.getAttribute("class").contains("noselect");
     }
 
     public void clickBuns() {
-        if (isSelected(getBunsTab())) {
+        if (isTabSelected(getBunsTab())) {
             getBunsTab().click();
         }
     }
 
     public void clickSauces() {
-        if (isSelected(getSaucesTab())) {
+        if (isTabSelected(getSaucesTab())) {
             getSaucesTab().click();
         }
     }
 
     public void clickFillings() {
-        if (isSelected(getFillingsTab())) {
+        if (isTabSelected(getFillingsTab())) {
             getFillingsTab().click();
         }
     }
