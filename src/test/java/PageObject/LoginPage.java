@@ -6,12 +6,23 @@ import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasePage {
 
+    public static final By LOGIN_HEADER = By.xpath("//h2[text()='Вход']");
+
     public static final By EMAIL_FIELD = By.xpath("//input[@name='name']");
     public static final By PASSWORD_FIELD = By.xpath("//input[@name='Пароль']");
     public static final By LOGIN_BUTTON = By.xpath("//button[text()='Войти']");
 
+    public static final By PASSWORD_ERROR_MESSAGE = By.xpath("//p[@class='input__error']");
+
+    public static final By REGISTER_BUTTON = By.xpath("//a[text()='Зарегистрироваться']");
+    public static final By FORGOT_PASSWORD_BUTTON = By.xpath("//a[text()='Восстановить пароль']");
+
     public LoginPage(WebDriver driver) {
         super(driver);
+    }
+
+    public boolean isHeaderDisplayed() {
+        return driver.findElement(LOGIN_HEADER).isDisplayed();
     }
 
     public WebElement getEmailField() {
@@ -26,6 +37,22 @@ public class LoginPage extends BasePage {
         return driver.findElement(LOGIN_BUTTON);
     }
 
+    public WebElement getRegisterButton() {
+        return driver.findElement(REGISTER_BUTTON);
+    }
+
+    public WebElement getForgotPasswordButton() {
+        return driver.findElement(FORGOT_PASSWORD_BUTTON);
+    }
+
+    public boolean isPasswordErrorDisplayed() {
+        return driver.findElement(PASSWORD_ERROR_MESSAGE).isDisplayed();
+    }
+
+    public String getPasswordErrorText() {
+        return driver.findElement(PASSWORD_ERROR_MESSAGE).getText();
+    }
+
     public void login(String email, String password) {
         getEmailField().clear();
         getEmailField().sendKeys(email);
@@ -35,20 +62,5 @@ public class LoginPage extends BasePage {
 
         getLoginButton().click();
     }
-
-    public static final By PASSWORD_ERROR_MESSAGE = By.cssSelector("p.input__error");
-
-        public boolean isPasswordErrorDisplayed() {
-        try {
-            return driver.findElement(PASSWORD_ERROR_MESSAGE).isDisplayed();
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return false;
-        }
-    }
-
-    public String getPasswordErrorText() {
-        return driver.findElement(PASSWORD_ERROR_MESSAGE).getText();
-    }
-
 
 }
