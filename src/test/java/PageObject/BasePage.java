@@ -7,29 +7,29 @@ public class BasePage {
 
     protected final WebDriver driver;
 
-    private final By constructorButton = By.xpath("//nav//a[contains(., 'Конструктор')]");
-    private final By orderFeedButton = By.xpath("//nav//a[contains(., 'Лента Заказов')]");
-    private final By profileButton = By.xpath("//nav//a[contains(., 'Личный Кабинет')]");
+    private final By CONSTRUCTOR_BUTTON = By.xpath("//nav//a[contains(., 'Конструктор')]");
+    private final By ORDER_FEED_BUTTON = By.xpath("//nav//a[contains(., 'Лента Заказов')]");
+    private final By PROFILE_BUTTON = By.xpath("//nav//a[contains(., 'Личный Кабинет')]");
 
-    private final By logoButton = By.cssSelector("div[class^='AppHeader_header__logo'] > a");
+    private final By LOGO_BUTTON = By.cssSelector("div[class^='AppHeader_header__logo'] > a");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
     }
 
     public void clickConstructor() {
-        driver.findElement(constructorButton).click();
+        driver.findElement(CONSTRUCTOR_BUTTON).click();
     }
 
     public void clickOrderFeed() {
-        driver.findElement(orderFeedButton).click();
+        driver.findElement(ORDER_FEED_BUTTON).click();
     }
 
     public void clickLogo() {
-        driver.findElement(logoButton).click();
+        driver.findElement(LOGO_BUTTON).click();
     }
 
     public void clickPersonalAccount() {
-        driver.findElement(profileButton).click();
+        driver.findElement(PROFILE_BUTTON).click();
     }
 }
