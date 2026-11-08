@@ -1,6 +1,7 @@
-import PageObject.ConstructorPage;
-import PageObject.LoginPage;
-import PageObject.RegisterPage;
+import model.User;
+import pageobject.ConstructorPage;
+import pageobject.LoginPage;
+import pageobject.RegisterPage;
 import org.junit.jupiter.api.*;
 
 public class RegistrationPageTests extends BaseTest {
@@ -20,32 +21,33 @@ public class RegistrationPageTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Успешную регистрацию.")
+    @DisplayName("Успешная регистрация")
     public void shouldRegister() {
 
-        registerPage.register("TESTER","test@yandex.ru","123456");
+        User user = new User("123456");
+        registerPage.register(user);
 
-        ConstructorPage constructorPageAgain = new ConstructorPage(driver);
+        LoginPage loginPageAgain = new LoginPage(driver);
 
         Assertions.assertTrue(
-                constructorPageAgain.isHeaderDisplayed(),
-                "заголовок ConstructorPage не отображается, переход после регистрации не осуществлён");
+                loginPageAgain.isHeaderDisplayed(),
+                "Тайтл страницы Вход не отображается");
     }
 
     @Test
-    @DisplayName("Ошибку для некорректного пароля. Минимальный пароль — шесть символов.")
+    @DisplayName("Ошибка для некорректного пароля. Минимальный пароль — шесть символов.")
     public void shouldGetErrorOnShortPassword() {
-        registerPage.register("TESTER","test@yandex.ru","123");
 
-        org.junit.jupiter.api.Assertions.assertTrue(
+        User user = new User("12345");
+        registerPage.register(user);
+
+        Assertions.assertTrue(
                 registerPage.isPasswordErrorDisplayed(),
-                "Сообщение об ошибке пароля не отображается!"
-        );
-
-        org.junit.jupiter.api.Assertions.assertEquals(
+                "Сообщение об ошибке пароля не отображается!");
+        Assertions.assertEquals(
                 "Некорректный пароль",
-                registerPage.getPasswordErrorText()
-        );
+                registerPage.getPasswordErrorText());
+
     }
 
 }

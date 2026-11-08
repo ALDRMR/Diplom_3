@@ -1,9 +1,10 @@
-import PageObject.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+import java.time.Duration;
 
 public class BaseTest {
 
@@ -14,6 +15,10 @@ public class BaseTest {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
             driver = new ChromeDriver(options);
+
+            driver.manage().window().maximize();
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+
             driver.get("https://qa-stellarburgers.education-services.ru/");
         }
 /*

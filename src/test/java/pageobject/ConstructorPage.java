@@ -1,4 +1,4 @@
-package PageObject;
+package pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -58,6 +58,11 @@ public class ConstructorPage extends BasePage {
         if (isTabSelected(getFillingsTab())) {
             getFillingsTab().click();
         }
+    }
+
+    public boolean isLoginButtonPresent() {
+        return !driver.findElements(LOGIN_TO_ACCOUNT_BUTTON).isEmpty()
+                && driver.findElement(LOGIN_TO_ACCOUNT_BUTTON).isDisplayed();
     }
 
 }

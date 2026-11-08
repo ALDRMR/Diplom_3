@@ -1,5 +1,5 @@
-import PageObject.ConstructorPage;
-import PageObject.LoginPage;
+import pageobject.ConstructorPage;
+import pageobject.LoginPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

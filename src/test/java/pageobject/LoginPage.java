@@ -1,5 +1,6 @@
-package PageObject;
+package pageobject;
 
+import model.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,12 +44,12 @@ public class LoginPage extends BasePage {
         return driver.findElement(FORGOT_PASSWORD_BUTTON);
     }
 
-    public void login(String email, String password) {
+    public void login(User user) {
         getEmailField().clear();
-        getEmailField().sendKeys(email);
+        getEmailField().sendKeys(user.getEmail());
 
         getPasswordField().clear();
-        getPasswordField().sendKeys(password);
+        getPasswordField().sendKeys(user.getPassword());
 
         getLoginButton().click();
     }

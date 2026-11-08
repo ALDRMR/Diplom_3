@@ -1,5 +1,6 @@
-package PageObject;
+package pageobject;
 
+import model.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +15,7 @@ public class RegisterPage extends BasePage{
     public static final By REGISTER_BUTTON = By.xpath("//button[text()='Зарегистрироваться']");
     public static final By LOGIN_BUTTON = By.cssSelector("a[href='/login']");
 
-    public static final By PASSWORD_ERROR_MESSAGE = By.xpath("//p[@class='input__error']");
+    public static final By PASSWORD_ERROR_MESSAGE = By.xpath("//p[text()='Некорректный пароль']");
 
     public RegisterPage(WebDriver driver) {
         super(driver);
@@ -52,10 +53,10 @@ public class RegisterPage extends BasePage{
         return driver.findElement(PASSWORD_ERROR_MESSAGE).getText();
     }
 
-    public void register(String name, String email, String password) {
-        getNameField().sendKeys(name);
-        getEmailField().sendKeys(email);
-        getPasswordField().sendKeys(password);
+    public void register(User user) {
+        getNameField().sendKeys(user.getName());
+        getEmailField().sendKeys(user.getEmail());
+        getPasswordField().sendKeys(user.getPassword());
         getRegisterButton().click();
     }
 
