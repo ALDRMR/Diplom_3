@@ -1,5 +1,6 @@
 package pageobject;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,18 +43,21 @@ public class ConstructorPage extends BasePage {
         return tab.getAttribute("class").contains("noselect");
     }
 
+    @Step("Перейти на вкладку Булки")
     public void clickBuns() {
         if (isTabSelected(getBunsTab())) {
             getBunsTab().click();
         }
     }
 
+    @Step("Перейти на вкладку Соусы")
     public void clickSauces() {
         if (isTabSelected(getSaucesTab())) {
             getSaucesTab().click();
         }
     }
 
+    @Step("Перейти на вкладку Начинки")
     public void clickFillings() {
         if (isTabSelected(getFillingsTab())) {
             getFillingsTab().click();

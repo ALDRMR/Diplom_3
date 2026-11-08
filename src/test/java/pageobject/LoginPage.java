@@ -1,5 +1,6 @@
 package pageobject;
 
+import io.qameta.allure.Step;
 import model.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -44,6 +45,7 @@ public class LoginPage extends BasePage {
         return driver.findElement(FORGOT_PASSWORD_BUTTON);
     }
 
+    @Step("Авторизоваться пользователем с email: {user.email}")
     public void login(User user) {
         getEmailField().clear();
         getEmailField().sendKeys(user.getEmail());

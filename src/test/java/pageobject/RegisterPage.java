@@ -1,5 +1,6 @@
 package pageobject;
 
+import io.qameta.allure.Step;
 import model.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -45,6 +46,7 @@ public class RegisterPage extends BasePage{
         return driver.findElement(LOGIN_BUTTON);
     }
 
+    @Step("Проверить отображение текста Некорректный пароль")
     public boolean isPasswordErrorDisplayed() {
         return driver.findElement(PASSWORD_ERROR_MESSAGE).isDisplayed();
     }
@@ -53,6 +55,7 @@ public class RegisterPage extends BasePage{
         return driver.findElement(PASSWORD_ERROR_MESSAGE).getText();
     }
 
+    @Step("Зарегистрировать пользователя: имя={user.name}, email={user.email}")
     public void register(User user) {
         getNameField().sendKeys(user.getName());
         getEmailField().sendKeys(user.getEmail());

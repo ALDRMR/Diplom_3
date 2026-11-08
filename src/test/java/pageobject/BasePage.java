@@ -23,14 +23,17 @@ public class BasePage {
         driver.findElement(CONSTRUCTOR_BUTTON).click();
     }
 
+    @Step("Кликнуть по кнопке «Лента Заказов»")
     public void clickOrderFeed() {
         driver.findElement(ORDER_FEED_BUTTON).click();
     }
 
+    @Step("Кликнуть по логотипу")
     public void clickLogo() {
         driver.findElement(LOGO_BUTTON).click();
     }
 
+    @Step("Кликнуть по кнопке «Личный Кабинет»")
     public void clickProfile() {
         driver.findElement(ACCOUNT_BUTTON).click();
     }

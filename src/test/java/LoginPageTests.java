@@ -15,7 +15,7 @@ public class LoginPageTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Переход в личный кабинет Проверь переход по клику на «Личный кабинет».")
+    @DisplayName("Переход по клику на «Личный кабинет».")
     public void shouldLogin() {
         loginPage.isHeaderDisplayed();
     }
