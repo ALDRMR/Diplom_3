@@ -1,5 +1,6 @@
 package pageobject;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -17,6 +18,7 @@ public class BasePage {
         this.driver = driver;
     }
 
+    @Step("Кликнуть по кнопке «Конструктор»")
     public void clickConstructor() {
         driver.findElement(CONSTRUCTOR_BUTTON).click();
     }

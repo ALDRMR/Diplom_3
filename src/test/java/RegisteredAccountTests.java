@@ -1,18 +1,20 @@
+import io.qameta.allure.Step;
 import model.User;
 import pageobject.*;
 import org.junit.jupiter.api.*;
 
 public class RegisteredAccountTests extends BaseTest {
 
-    LoginPage loginPageSecondTime;
-    User user;
+    private User user;
+    private LoginPage loginPage;
+    private ConstructorPage constructorPage;
 
     @BeforeEach
     void setUp() {
-        ConstructorPage constructorPage = new ConstructorPage(driver);
+        constructorPage = new ConstructorPage(driver);
         constructorPage.clickProfile();
 
-        LoginPage loginPage = new LoginPage(driver);
+        loginPage = new LoginPage(driver);
         loginPage.getRegisterButton().click();
 
         RegisterPage registerPage = new RegisterPage(driver);
@@ -21,85 +23,69 @@ public class RegisteredAccountTests extends BaseTest {
         user = new User("123456");
         registerPage.register(user);
 
-        loginPageSecondTime = new LoginPage(driver);
-        loginPageSecondTime.isHeaderDisplayed();
+        loginPage.isHeaderDisplayed();
+    }
+
+    @Step("Вход в аккаунт и проверка успешной авторизации")
+    private void loginAndVerifySuccess() {
+        loginPage.login(user);
+
+        Assertions.assertFalse(
+                constructorPage.isLoginButtonPresent(),
+                "Кнопка 'Войти в аккаунт' всё ещё отображается — авторизация не прошла"
+        );
     }
 
     @Test
-    @DisplayName("Выход из аккаунта по кнопке «Выйти» в личном кабинете.")
+    @DisplayName("Выход из аккаунта по кнопке «Выйти» в личном кабинете")
     public void shouldLogOff() {
-        loginPageSecondTime.login(user);
-        ConstructorPage constructorPage = new ConstructorPage(driver);
+        loginPage.login(user);
         constructorPage.clickProfile();
+
         AccountPage accountPage = new AccountPage(driver);
         accountPage.clickLogout();
-        LoginPage loginPageThirdTime = new LoginPage(driver);
 
         Assertions.assertTrue(
-                loginPageThirdTime.isHeaderDisplayed(),
-                "Тайтл страницы Вход не отображается");
+                loginPage.isHeaderDisplayed(),
+                "Заголовок страницы 'Вход' не отображается"
+        );
     }
 
     @Test
-    @DisplayName("вход по кнопке «Войти в аккаунт» на главной")
+    @DisplayName("Вход по кнопке «Войти в аккаунт» на главной")
     public void shouldGoToLoginPageFromConstructorPage() {
-        loginPageSecondTime.clickConstructor();
-        ConstructorPage constructorPage = new ConstructorPage(driver);
+        loginPage.clickConstructor();
         constructorPage.getLoginToAccountButton().click();
 
-        LoginPage loginPageThirdTime = new LoginPage(driver);
-        loginPageThirdTime.login(user);
-
-        ConstructorPage constructorPageSecond = new ConstructorPage(driver);
-        Assertions.assertTrue(
-                !constructorPageSecond.isLoginButtonPresent(),
-                "Кнопка Войти в аккаунт отображается, не авторизовались");
+        loginAndVerifySuccess();
     }
 
     @Test
-    @DisplayName("вход через кнопку «Личный кабинет»,")
+    @DisplayName("Вход через кнопку «Личный кабинет»")
     public void shouldGoToLoginPageFromHeader() {
-        loginPageSecondTime.clickProfile();
+        loginPage.clickProfile();
 
-        LoginPage loginPageThirdTime = new LoginPage(driver);
-        loginPageThirdTime.login(user);
-
-        ConstructorPage constructorPageSecond = new ConstructorPage(driver);
-        Assertions.assertTrue(
-                !constructorPageSecond.isLoginButtonPresent(),
-                "Кнопка Войти в аккаунт отображается, не авторизовались");
+        loginAndVerifySuccess();
     }
 
     @Test
-    @DisplayName("вход через кнопку в форме регистрации,")
+    @DisplayName("Вход через кнопку в форме регистрации")
     public void shouldGoToLoginPageFromRegistrationForm() {
-        loginPageSecondTime.getRegisterButton().click();
+        loginPage.getRegisterButton().click();
         RegisterPage registerPage = new RegisterPage(driver);
         registerPage.getLoginButton().click();
 
-        LoginPage loginPageThirdTime = new LoginPage(driver);
-        loginPageThirdTime.login(user);
-
-        ConstructorPage constructorPageSecond = new ConstructorPage(driver);
-        Assertions.assertTrue(
-                !constructorPageSecond.isLoginButtonPresent(),
-                "Кнопка Войти в аккаунт отображается, не авторизовались");
+        loginAndVerifySuccess();
     }
 
     @Test
-    @DisplayName("вход через кнопку в форме восстановления пароля.")
+    @DisplayName("Вход через кнопку в форме восстановления пароля")
     public void shouldGoToLoginPageFromForgotPasswordForm() {
-        loginPageSecondTime.getForgotPasswordButton().click();
+        loginPage.getForgotPasswordButton().click();
         ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(driver);
         forgotPasswordPage.getLoginButton().click();
 
-        LoginPage loginPageThirdTime = new LoginPage(driver);
-        loginPageThirdTime.login(user);
-
-        ConstructorPage constructorPageSecond = new ConstructorPage(driver);
-        Assertions.assertTrue(
-                !constructorPageSecond.isLoginButtonPresent(),
-                "Кнопка Войти в аккаунт отображается, не авторизовались");
+        loginAndVerifySuccess();
     }
 
 }
