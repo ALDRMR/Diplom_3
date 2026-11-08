@@ -14,15 +14,10 @@ public class RegisteredAccountTests extends BaseTest {
         constructorPage = new ConstructorPage(driver);
         constructorPage.clickProfile();
 
-        loginPage = new LoginPage(driver);
-        loginPage.getRegisterButton().click();
-
-        RegisterPage registerPage = new RegisterPage(driver);
-        registerPage.isHeaderDisplayed();
-
         user = new User("123456");
-        registerPage.register(user);
+        createUserWithAPI(user);
 
+        loginPage = new LoginPage(driver);
         loginPage.isHeaderDisplayed();
     }
 
@@ -32,27 +27,12 @@ public class RegisteredAccountTests extends BaseTest {
 
         Assertions.assertFalse(
                 constructorPage.isLoginButtonPresent(),
-                "Кнопка 'Войти в аккаунт' всё ещё отображается — авторизация не прошла"
+                "Кнопка Войти в аккаунт всё ещё отображается — авторизация не прошла"
         );
     }
 
     @Test
-    @DisplayName("Выход из аккаунта по кнопке «Выйти» в личном кабинете")
-    public void shouldLogOff() {
-        loginPage.login(user);
-        constructorPage.clickProfile();
-
-        AccountPage accountPage = new AccountPage(driver);
-        accountPage.clickLogout();
-
-        Assertions.assertTrue(
-                loginPage.isHeaderDisplayed(),
-                "Заголовок страницы 'Вход' не отображается"
-        );
-    }
-
-    @Test
-    @DisplayName("Вход по кнопке «Войти в аккаунт» на главной")
+    @DisplayName("Вход по кнопке Войти в аккаунт на главной")
     public void shouldGoToLoginPageFromConstructorPage() {
         loginPage.clickConstructor();
         constructorPage.getLoginToAccountButton().click();
@@ -61,7 +41,7 @@ public class RegisteredAccountTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Вход через кнопку «Личный кабинет»")
+    @DisplayName("Вход через кнопку Личный кабинет")
     public void shouldGoToLoginPageFromHeader() {
         loginPage.clickProfile();
 
@@ -86,6 +66,21 @@ public class RegisteredAccountTests extends BaseTest {
         forgotPasswordPage.getLoginButton().click();
 
         loginAndVerifySuccess();
+    }
+
+    @Test
+    @DisplayName("Выход из аккаунта по кнопке «Выйти» в личном кабинете")
+    public void shouldLogOff() {
+        loginPage.login(user);
+        constructorPage.clickProfile();
+
+        AccountPage accountPage = new AccountPage(driver);
+        accountPage.clickLogout();
+
+        Assertions.assertTrue(
+                loginPage.isHeaderDisplayed(),
+                "Заголовок страницы Вход не отображается"
+        );
     }
 
 }

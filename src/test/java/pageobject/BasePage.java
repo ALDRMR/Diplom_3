@@ -1,8 +1,11 @@
 package pageobject;
 
+import apiclient.ApiUserClient;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import static org.hamcrest.Matchers.equalTo;
 
 public class BasePage {
 
@@ -37,4 +40,5 @@ public class BasePage {
     public void clickProfile() {
         driver.findElement(ACCOUNT_BUTTON).click();
     }
+
 }

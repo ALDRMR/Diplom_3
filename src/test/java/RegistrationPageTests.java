@@ -47,7 +47,6 @@ public class RegistrationPageTests extends BaseTest {
         Assertions.assertEquals(
                 "Некорректный пароль",
                 registerPage.getPasswordErrorText());
-
     }
 
 }

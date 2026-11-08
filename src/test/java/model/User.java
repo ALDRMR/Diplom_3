@@ -1,7 +1,9 @@
 package model;
 
+import lombok.Getter;
 import java.util.UUID;
 
+@Getter
 public class User {
 
     private final String name;
@@ -20,9 +22,5 @@ public class User {
                 " email: " + this.getName() +
                 " password: " + this.getName() );
     }
-
-    public String getName() { return name; }
-    public String getEmail() { return email; }
-    public String getPassword() { return password; }
 
 }
