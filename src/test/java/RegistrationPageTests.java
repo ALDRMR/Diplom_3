@@ -6,15 +6,13 @@ import org.junit.jupiter.api.*;
 
 public class RegistrationPageTests extends BaseTest {
 
-    private ConstructorPage constructorPage;
-    private LoginPage loginPage;
     private RegisterPage registerPage;
 
     @BeforeEach
     void setUp() {
-        constructorPage = new ConstructorPage(driver);
+        ConstructorPage constructorPage = new ConstructorPage(driver);
         constructorPage.clickProfile();
-        loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
         loginPage.getRegisterButton().click();
         registerPage = new RegisterPage(driver);
         registerPage.isHeaderDisplayed();

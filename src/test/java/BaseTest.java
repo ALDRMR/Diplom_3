@@ -1,11 +1,10 @@
 import apiclient.ApiUserClient;
+import driver.WebDriverCreator;
 import io.qameta.allure.Step;
 import model.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 
@@ -19,25 +18,14 @@ public class BaseTest {
         protected String accessToken;
 
         @BeforeEach
-        void setUpChrome() {
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
-            driver = new ChromeDriver(options);
+        public void driverSetUp() {
+            driver = WebDriverCreator.createWebDriver();
 
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-
             driver.get("https://qa-stellarburgers.education-services.ru/");
         }
-    /*
-        @BeforeEach
-        void setUpYandex() {
-            YandexOptions options = new YandexOptions();
-            // options.addArguments("--headless");
-            driver = new YandexDriver(options);
-            driver.get("https://qa-scooter.education-services.ru/");
-        }
-    */
+
         @BeforeEach
         public void baseSetUp() {
             apiUserClient = new ApiUserClient();
@@ -54,11 +42,11 @@ public class BaseTest {
         }
 
         @AfterEach
-        void teardown() {
+        void driverTeardown() {
             if (driver != null) {
                 driver.quit();
-                }
             }
+        }
 
         @Step("Создать пользователя {user.name}")
         public String createUserWithAPI(User user){
