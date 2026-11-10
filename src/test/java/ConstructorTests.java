@@ -41,27 +41,39 @@ public class ConstructorTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("Раздел «Конструктор», переходы по вкладкам Булки Соусы Начинки")
-    public void shouldChangeConstructorTabs() {
-
+    @DisplayName("Раздел «Конструктор», переход на вкладку Булки (по умолчанию активная)")
+    public void shouldSelectBunsTab() {
         ConstructorPage constructorPage = new ConstructorPage(driver);
-        constructorPage.clickConstructor();
-
+        // При переходе на Конструктор по умолчанию вкладка Булки
         constructorPage.clickFillings();
-        assertTrue(
-                constructorPage.isTabSelected(constructorPage.getFillingsTab()),
-                "Вкладка Начинки не выбрана после клика");
-
-        constructorPage.clickSauces();
-        assertTrue(
-                constructorPage.isTabSelected(constructorPage.getSaucesTab()),
-                "Вкладка Соусы не выбрана после клика");
-
         constructorPage.clickBuns();
-        assertTrue(
-                constructorPage.isTabSelected(constructorPage.getBunsTab()),
-                "Вкладка Булки не выбрана после клика");
 
+        assertTrue(
+                constructorPage.isTabSelected(constructorPage.getBunsTabButton()),
+                "Вкладка Булки не выбрана после клика");
+    }
+
+
+    @Test
+    @DisplayName("Раздел «Конструктор», переход на вкладку Соусы")
+    public void shouldSelectSaucesTab() {
+        ConstructorPage constructorPage = new ConstructorPage(driver);
+        constructorPage.clickSauces();
+
+        assertTrue(
+                constructorPage.isTabSelected(constructorPage.getSaucesTabButton()),
+                "Вкладка Соусы не выбрана после клика");
+    }
+
+    @Test
+    @DisplayName("Раздел «Конструктор», переход на вкладку Начинки")
+    public void shouldSelectFillingsTab() {
+        ConstructorPage constructorPage = new ConstructorPage(driver);
+        constructorPage.clickFillings();
+
+        assertTrue(
+                constructorPage.isTabSelected(constructorPage.getFillingsTabButton()),
+                "Вкладка Начинки не выбрана после клика");
     }
 
 }
