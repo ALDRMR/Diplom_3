@@ -1,10 +1,14 @@
 package pageobject;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import io.qameta.allure.Allure;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class ConstructorPage extends BasePage {
 
@@ -45,31 +49,30 @@ public class ConstructorPage extends BasePage {
         return classAttribute != null && classAttribute.contains("tab_tab_type_current");
     }
 
+    private void selectTab(By tabLocator, String tabName) {
+        WebElement tab = driver.findElement(tabLocator);
+        if (!isTabSelected(tab)) {
+            tab.click();
+            new WebDriverWait(driver, Duration.ofSeconds(5))
+                    .until(ExpectedConditions.attributeContains(tabLocator, "class", "tab_tab_type_current"));
+        } else {
+            Allure.step("Вкладка " + tabName + " уже выбрана, кнопка не активна");
+        }
+    }
+
     @Step("Перейти на вкладку Булки")
     public void clickBuns() {
-        if (!isTabSelected(getBunsTabButton())) {
-            getBunsTabButton().click();
-        } else {
-            Allure.step("Вкладка Булки уже выбрана, кнопка не активна");
-        }
+        selectTab(BUNS_TAB_BUTTON, "Булки");
     }
 
     @Step("Перейти на вкладку Соусы")
     public void clickSauces() {
-        if (!isTabSelected(getSaucesTabButton())) {
-            getSaucesTabButton().click();
-        } else {
-            Allure.step("Вкладка Соусы уже выбрана, кнопка не активна");
-        }
+        selectTab(SAUCES_TAB_BUTTON, "Соусы");
     }
 
     @Step("Перейти на вкладку Начинки")
     public void clickFillings() {
-        if (!isTabSelected(getFillingsTabButton())) {
-            getFillingsTabButton().click();
-        } else {
-            Allure.step("Вкладка Начинки уже выбрана, кнопка не активна");
-        }
+        selectTab(FILLINGS_TAB_BUTTON, "Начинки");
     }
 
     public boolean isLoginButtonPresent() {
